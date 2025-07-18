@@ -1,7 +1,7 @@
 import { moons, planets } from '@/modules/universe/constants/universe'
 import { PlanetWithMoons } from '@/modules/universe/types'
 
-export const getPlanetsWithMoons = async (): Promise<PlanetWithMoons[]> => {
+export const getPlanetsWithMoons = (): PlanetWithMoons[] => {
   const planetsById: { [key: number]: PlanetWithMoons } = {}
 
   for (const planet of planets) {
