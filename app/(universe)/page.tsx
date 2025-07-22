@@ -1,8 +1,14 @@
+import { Suspense } from 'react'
+
 import { getPlanetsWithMoons } from '@/modules/universe/lib/data'
-import { UniverseView } from '@/modules/universe/ui/views/universe-view'
+import { UniverseLoading, UniverseView } from '@/modules/universe/ui/views/universe-view'
 
-export default function UniversePage() {
-  const planets = getPlanetsWithMoons()
+export default async function UniversePage() {
+  const planetsPromise = getPlanetsWithMoons()
 
-  return <UniverseView planets={planets} />
+  return (
+    <Suspense fallback={<UniverseLoading />}>
+      <UniverseView planetsPromise={planetsPromise} />
+    </Suspense>
+  )
 }

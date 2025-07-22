@@ -1,7 +1,7 @@
 import { moons, planets } from '@/modules/universe/constants/universe'
 import { PlanetWithMoons } from '@/modules/universe/types'
 
-export const getPlanetsWithMoons = (): PlanetWithMoons[] => {
+export const getPlanetsWithMoons = async (): Promise<PlanetWithMoons[]> => {
   const planetsById: { [key: number]: PlanetWithMoons } = {}
 
   for (const planet of planets) {
@@ -17,6 +17,12 @@ export const getPlanetsWithMoons = (): PlanetWithMoons[] => {
       console.warn(`Unable to find the planet by ID: ${moon.planetId}`)
     }
   }
+
+  // simulate server response
+  /* return new Promise((resolve) => setTimeout(() => {
+       resolve(Object.values(planetsById))
+     }, 3000))
+  */
 
   return Object.values(planetsById)
 }

@@ -1,15 +1,17 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { use, useCallback, useState } from 'react'
 
+import { LoadingState } from '@/components/loading-state'
 import { PlanetWithMoons, SelectedMoonsByPlanet } from '@/modules/universe/types'
 import { PlanetRow } from '@/modules/universe/ui/components/planet-row'
 
 interface UniverseViewProps {
-  planets: PlanetWithMoons[]
+  planetsPromise: Promise<PlanetWithMoons[]>
 }
 
-export const UniverseView = ({ planets }: UniverseViewProps) => {
+export const UniverseView = ({ planetsPromise }: UniverseViewProps) => {
+  const planets = use(planetsPromise)
   const [selectedMoonsByPlanet, onToggle] = usePlanets(planets)
 
   return (
@@ -49,3 +51,5 @@ const usePlanets = (
 
   return [selected, onToggle]
 }
+
+export const UniverseLoading = () => <LoadingState title="Loading Universe" description="It may take a while..." />
